@@ -33,8 +33,11 @@ function customerReducer(
   switch (action.type) {
     case "hydrate":
       return action.info
-    case "set":
-      return { ...state, [action.field]: action.value }
+    case "set": {
+      const next = { ...state, [action.field]: action.value }
+      saveCustomerInfo(next)
+      return next
+    }
     default:
       return state
   }
@@ -95,7 +98,6 @@ export function CheckoutForm({ methods }: { methods: PaymentMethodOption[] }) {
         return
       }
       orderPlacedRef.current = true
-      saveCustomerInfo(customer)
       cart.clear()
       if (data.url) {
         window.location.href = data.url

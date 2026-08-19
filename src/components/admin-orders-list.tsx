@@ -30,6 +30,12 @@ export function AdminOrdersList({
   const [orders, setOrders] = useState(initialOrders)
   const [refreshing, setRefreshing] = useState(false)
   const [updatingId, setUpdatingId] = useState<string | null>(null)
+  const [statusFilter, setStatusFilter] = useState<string>("all")
+
+  const filteredOrders =
+    statusFilter === "all"
+      ? orders
+      : orders.filter((o) => o.status === statusFilter)
 
   async function refresh() {
     setRefreshing(true)
@@ -77,7 +83,7 @@ export function AdminOrdersList({
     <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-4 p-4">
       <header className="flex items-center justify-between">
         <h1 className="font-heading text-lg font-extrabold uppercase tracking-tight">
-          Đơn hàng ({orders.length})
+          Đơn hàng ({filteredOrders.length})
         </h1>
         <div className="flex gap-2">
           <Button
@@ -100,13 +106,44 @@ export function AdminOrdersList({
         </div>
       </header>
 
-      {orders.length === 0 ? (
+      <div className="flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={() => setStatusFilter("all")}
+          className={`h-8 rounded-full px-3 text-xs font-semibold ${
+            statusFilter === "all"
+              ? "bg-brand text-white"
+              : "bg-card text-muted-foreground"
+          }`}
+        >
+          Tất cả ({orders.length})
+        </button>
+        {ORDER_STATUSES.map((status) => {
+          const count = orders.filter((o) => o.status === status).length
+          return (
+            <button
+              key={status}
+              type="button"
+              onClick={() => setStatusFilter(status)}
+              className={`h-8 rounded-full px-3 text-xs font-semibold ${
+                statusFilter === status
+                  ? "bg-brand text-white"
+                  : "bg-card text-muted-foreground"
+              }`}
+            >
+              {STATUS_LABEL[status]} ({count})
+            </button>
+          )
+        })}
+      </div>
+
+      {filteredOrders.length === 0 ? (
         <p className="text-center text-sm text-muted-foreground">
           Chưa có đơn hàng nào
         </p>
       ) : (
         <div className="flex flex-col gap-3">
-          {orders.map((order) => (
+          {filteredOrders.map((order) => (
             <div key={order.id} className="flex flex-col gap-2 rounded-2xl bg-card p-4">
               <div className="flex items-start justify-between gap-2">
                 <div>
