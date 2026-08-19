@@ -1,6 +1,7 @@
 /**
- * Single source of truth for environment variables, feature toggles, product
- * catalog and coupons. No other file should read `process.env` directly.
+ * Client-safe config: feature toggles, product catalog and coupons. No
+ * secrets here — this file is bundled into client components. Server-only
+ * values (DB connection string, PINs, API secrets) live in config.server.ts.
  */
 
 export type Product = {
@@ -22,26 +23,13 @@ export type Coupon = {
 
 export type PaymentMethodId = "cod" | "stripe"
 
-if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL is required (Postgres connection string)")
-}
-
-const env = {
-  databaseUrl: process.env.DATABASE_URL,
-  stripeSecretKey: process.env.STRIPE_SECRET_KEY ?? "",
-  stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY ?? "",
-  stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET ?? "",
-  baseUrl: process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000",
-  adminPin: process.env.ADMIN_PIN ?? "111111",
-}
-
 export const SITE = {
   name: "Bánh Mì Ngon",
   tagline: "Bánh mì kẹp kiểu mới, đầy ắp topping",
   phone: "0900 000 000",
   address: "Đ. Lê Văn Sỹ, P. Nhiêu Lộc, TP. Hồ Chí Minh",
   currency: "VND",
-  baseUrl: env.baseUrl,
+  baseUrl: process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000",
   social: {
     facebook: "https://facebook.com",
     instagram: "https://instagram.com",
@@ -49,36 +37,7 @@ export const SITE = {
   },
 }
 
-/** PIN for /admin. Override with ADMIN_PIN env var in production. */
-export const ADMIN_PIN = env.adminPin
-
-export const DATABASE_URL = env.databaseUrl
-
 export const DELIVERY_FEE = 15000
-
-/**
- * Both methods can be toggled here. Stripe only actually renders in the UI
- * when it's enabled AND a secret key is configured.
- */
-export const PAYMENTS: Record<
-  PaymentMethodId,
-  { enabled: boolean; label: string }
-> = {
-  cod: {
-    enabled: true,
-    label: "Thanh toán khi nhận hàng (COD)",
-  },
-  stripe: {
-    enabled: Boolean(env.stripeSecretKey),
-    label: "Thẻ / Ví (Stripe)",
-  },
-}
-
-export const STRIPE = {
-  secretKey: env.stripeSecretKey,
-  publishableKey: env.stripePublishableKey,
-  webhookSecret: env.stripeWebhookSecret,
-}
 
 export const PRODUCTS: Product[] = [
   {

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { z } from "zod"
-import { ADMIN_PIN } from "@/config"
+import { ADMIN_PIN } from "@/config.server"
 import { setAdminCookie } from "@/lib/admin-auth"
 
 const bodySchema = z.object({ pin: z.string().min(1) })

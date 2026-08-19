@@ -1,6 +1,6 @@
 import crypto from "node:crypto"
 import { cookies } from "next/headers"
-import { ADMIN_PIN } from "@/config"
+import { ADMIN_PIN } from "@/config.server"
 
 const COOKIE_NAME = "admin_auth"
 

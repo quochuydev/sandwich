@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm"
 import { NextResponse } from "next/server"
-import { STRIPE } from "@/config"
+import { STRIPE } from "@/config.server"
 import { db } from "@/db"
 import { orders } from "@/db/schema"
 import { stripe } from "@/lib/stripe"

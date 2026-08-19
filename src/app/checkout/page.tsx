@@ -1,4 +1,5 @@
-import { PAYMENTS, type PaymentMethodId } from "@/config"
+import type { PaymentMethodId } from "@/config"
+import { PAYMENTS } from "@/config.server"
 import { CheckoutForm } from "@/components/checkout-form"
 
 export default function CheckoutPage() {
