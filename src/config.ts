@@ -37,7 +37,7 @@ export const SITE = {
   },
 }
 
-export const DELIVERY_FEE = 15000
+export const DELIVERY_FEE = 5000
 
 export const PRODUCTS: Product[] = [
   {
