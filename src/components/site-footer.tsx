@@ -9,7 +9,7 @@ const SOCIAL_LINKS = [
 
 export function SiteFooter() {
   return (
-    <footer className="mt-6 flex flex-col gap-3 border-t border-border px-4 py-6 text-sm">
+    <footer className="mx-4 mt-6 mb-4 flex flex-col gap-3 rounded-2xl bg-card p-4 text-sm">
       <p className="font-heading font-extrabold uppercase tracking-tight">
         {SITE.name}
       </p>
