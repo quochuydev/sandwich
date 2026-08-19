@@ -5,6 +5,9 @@ cart, apply coupons, and check out with Cash-on-Delivery or Stripe — no
 account required. Includes a PIN-gated `/admin` page to view orders and
 update status.
 
+Live: https://sandwich.cappuai.com (pending DNS) · https://sandwich-navy.vercel.app
+Repo: https://github.com/quochuydev/sandwich
+
 ## Stack
 
 - Next.js 16 (App Router, Turbopack)
