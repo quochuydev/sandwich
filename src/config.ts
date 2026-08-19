@@ -32,7 +32,7 @@ const env = {
   stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY ?? "",
   stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET ?? "",
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000",
-  adminPin: process.env.ADMIN_PIN ?? "2468",
+  adminPin: process.env.ADMIN_PIN ?? "111111",
 }
 
 export const SITE = {
