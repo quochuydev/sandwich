@@ -39,7 +39,7 @@ export const SITE = {
   name: "Bánh Mì Ngon",
   tagline: "Bánh mì kẹp kiểu mới, đầy ắp topping",
   phone: "0900 000 000",
-  address: "123 Lê Lợi, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh",
+  address: "Đ. Lê Văn Sỹ, P. Nhiêu Lộc, TP. Hồ Chí Minh",
   currency: "VND",
   baseUrl: env.baseUrl,
   social: {
